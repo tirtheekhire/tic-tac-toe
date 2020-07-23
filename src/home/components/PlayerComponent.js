@@ -1,9 +1,9 @@
 import React from 'react';
 import "../css/style.css";
 
-function PlayerComponent(props) {
+const PlayerComponent = (props) => {
     return (
-        <div class="playerNameBox">
+        <div className="playerNameBox">
             {props.name}
         </div>
     );

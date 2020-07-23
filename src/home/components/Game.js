@@ -1,25 +1,15 @@
 import React from 'react';
 import "../css/style.css";
 
-function Game() {
+const Game = ({onClick, turnValue, symbol}) => {
+    console.log('symbol ==>', symbol)
+    console.log('turnValue ==>', turnValue)
+    
+    // let boardValue = turnValue === true ? 'X' : 'O';
     return (
-        <table>
-            <tr>
-                <td>X</td>
-                <td>0</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>0</td>
-                <td>X</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td>X</td>
-            </tr>
-        </table>
+        <button onClick={onClick} className="square">
+            {symbol}
+        </button>
     );
   }
   

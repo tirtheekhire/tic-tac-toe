@@ -4,20 +4,38 @@ import './css/style.css';
 import PlayerComponent from "./components/PlayerComponent.js";
 import Game from "./components/Game.js";
 import Timer from "./components/Timer";
+import { connect } from "react-redux";
+import { setSymbol } from "./action/boardActionCreator";
+// import { initialState } from "../rootReducer.js";
 
-function home() {
+
+const home = (props) => {
   return (
     <body>
       <div className="App">
         <div className="playerContainer">
           <PlayerComponent name="Player 1"/>
-          <button class="startButton" onClick="">Start</button>
+          <button className="startButton" onClick="">Start</button>
           <PlayerComponent name="Player 2"/>
         </div>
-        <div class="timerDiv">
+        <div className="timerDiv">
           <Timer time="4"/>
-          <div class="gameDiv">
-            <Game/>
+          <div className="gameDiv">
+            {
+              
+              props.board.map((symbol,index) =>{
+                return(
+                  <Game 
+                    key={index}
+                    index={index}
+                    symbol={symbol}
+                    turnValue={props.turn}
+                    onClick={() => props.handleClick(index, props.turn)}
+                   />
+                )
+                
+              })
+            }
           </div>
           <Timer time="0"/>
         </div>
@@ -26,5 +44,23 @@ function home() {
     </body>
   );
 }
+home.defaultProps = {
+  board:['','','','','','','','',''],
+  turn: true,
+};
 
-export default home;
+const mapStateToProps = (state) => {
+  return {
+    board: state.tictactoe.board,
+    turn: state.tictactoe.turnValue,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // dispatching plain actions
+    handleClick: (index, bool) => dispatch(setSymbol({index:index, bool:bool})),
+  }
+}
+
+export default connect(mapStateToProps , mapDispatchToProps)(home);

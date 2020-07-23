@@ -1,9 +1,9 @@
 import React from 'react';
 import "../css/style.css";
 
-function Timer(props) {
+const Timer = (props) => {
     return (
-        <div class="timer">
+        <div className="timer">
            {props.time}
         </div>
     );
