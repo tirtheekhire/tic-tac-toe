@@ -1,22 +1,18 @@
 import React from 'react';
-// import logo from '../logo.svg';
 import './css/style.css';
 import PlayerComponent from "./components/PlayerComponent.js";
 import Game from "./components/Game.js";
 import Timer from "./components/Timer";
 import { connect } from "react-redux";
-import { setSymbol } from "./action/boardActionCreator";
-// import { initialState } from "../rootReducer.js";
-
+import { setSymbol, resetGame } from "./action/boardActionCreator";
 
 const home = (props) => {
   return (
-    <body>
       <div className="App">
         <div className="playerContainer">
-          <PlayerComponent name="Player 1"/>
-          <button className="startButton" onClick="">Start</button>
-          <PlayerComponent name="Player 2"/>
+          <PlayerComponent name="Player X"/>
+          <button className="startButton" onClick={() => props.reset()}>Start</button>
+          <PlayerComponent name="Player O"/>
         </div>
         <div className="timerDiv">
           <Timer time="4"/>
@@ -39,20 +35,21 @@ const home = (props) => {
           </div>
           <Timer time="0"/>
         </div>
-        <p>Player 1 win !</p>
+          <p>{props.winner === 'n' ? '' : (props.winner === 'd')  ?  'Game Draw'  : `Player ${props.winner} win !`}</p>
       </div>
-    </body>
   );
 }
 home.defaultProps = {
   board:['','','','','','','','',''],
   turn: true,
+  winner: 'n',
 };
 
 const mapStateToProps = (state) => {
   return {
     board: state.tictactoe.board,
     turn: state.tictactoe.turnValue,
+    winner: state.tictactoe.winner,
   }
 }
 
@@ -60,6 +57,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     // dispatching plain actions
     handleClick: (index, bool) => dispatch(setSymbol({index:index, bool:bool})),
+    reset: () => dispatch(resetGame())
   }
 }
 

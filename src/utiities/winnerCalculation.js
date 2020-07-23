@@ -1,30 +1,20 @@
-export default winnerCalculation = (arr) => {
-    const combination = [
-        [0,1,2],
-        [3,4,5],
-        [6,7,8],
-        [0,3,6],
-        [1,4,7],
-        [2,5,8],
-        [0,4,8],
-        [2,4,6]
-    ]
+export const winnerCalculation = (board) => {
+    var check = function(a,b,c) {
+        return !!(a + b + c).match(/^(xxx|ooo)$/gi);
+    };
 
+    if (check(board[0], board[1], board[2])) return board[0];
+    if (check(board[3], board[4], board[5])) return board[3];
+    if (check(board[6], board[7], board[8])) return board[6];
 
+    if (check(board[0], board[3], board[6])) return board[0];
+    if (check(board[1], board[4], board[7])) return board[1];
+    if (check(board[2], board[5], board[8])) return board[2];
 
-    for (let i=0 ; i<combination.length ; i++) {
-        const [a,b,c] = combination[i];
-        if(arr[a] && arr[a] === arr[b] && arr[a] === arr[c]){
-            return arr[a]
-        }
-    }
-    return null;
+    if (check(board[0], board[4], board[8])) return board[0];
+    if (check(board[2], board[4], board[6])) return board[2];
+
+    if (board.join('').length === 9) return 'd';
+    
+    return 'n';
 }
-
-const arr = [
-    null, null , null,
-    x,x,x,
-    null,0,0,
-]
-
-console.log(winnerCalculation(arr));

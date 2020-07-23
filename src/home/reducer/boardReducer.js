@@ -1,4 +1,6 @@
 import * as types from '../action/actionTypes';
+import { winnerCalculation } from '../../utiities/winnerCalculation';
+import _ from 'lodash';
 
 const initialState = {
     board: [
@@ -10,41 +12,19 @@ const initialState = {
     winner: 'n'
 };
 
-const newBoard=[
-    '', '', '',
-    '', '', '',
-    '', '', ''
-];
-
 export const tictactoe = (state = initialState, action) => {
     switch(action.type) {
         case types.SET_SYMBOL:
-            console.log('action inside reducer ===>', action)
-            if (action.payload.bool) {
-                newBoard[action.payload.index] = "O";
-                // newBoard[action.index] = action.symbol;
+            if (!state.board[action.payload.index] && state.winner === 'n') {
+                const newBoard = _.cloneDeep(state.board);
+                newBoard[action.payload.index] = action.payload.bool ? "X" : "O";
                 return {
                     ...state,
                     board: newBoard,
                     turnValue: action.payload.bool === true ? false : true,
-                    // winner: checkWinner(newBoard)
-                };
-            }else{
-                newBoard[action.payload.index] = "X";
-                // newBoard[action.index] = action.symbol;
-                return {
-                    ...state,
-                    board: newBoard,
-                    turnValue: action.payload.bool === true ? false : true,
-                    // winner: checkWinner(newBoard)
+                    winner: winnerCalculation(newBoard)
                 };
             }
-            // return state;?
-            // return {
-            //     turnValue: action.payload.bool === true ? false : true,
-                
-            // }
-            // console.log('symbol set')
         case types.RESET_GAME:
             return {
                 ...initialState
