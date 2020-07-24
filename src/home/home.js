@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { setSymbol, resetGame } from "./action/boardActionCreator";
 
 const home = (props) => {
+
   return (
       <div className="App">
         <div className="playerContainer">
@@ -15,7 +16,7 @@ const home = (props) => {
           <PlayerComponent name="Player O"/>
         </div>
         <div className="timerDiv">
-          <Timer time="4"/>
+          {/* <Timer time="4"/> */}
           <div className="gameDiv">
             {
               
@@ -33,12 +34,13 @@ const home = (props) => {
               })
             }
           </div>
-          <Timer time="0"/>
+          {/* <Timer time="0"/> */}
         </div>
           <p>{props.winner === 'n' ? '' : (props.winner === 'd')  ?  'Game Draw'  : `Player ${props.winner} win !`}</p>
       </div>
   );
 }
+
 home.defaultProps = {
   board:['','','','','','','','',''],
   turn: true,

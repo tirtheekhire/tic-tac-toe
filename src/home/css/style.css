@@ -1,23 +1,19 @@
 body {
     margin: 0px;
     padding: 0px;
-    flex: 1;
-    background-color: white;
+    background-color: #ddaeae;
+    outline: none;
 }
 
 .App { 
     margin: auto;
     width: 50%;
     padding: 10px;
-    height:400px;
-    background-color: gray;
 }
   
 .playerContainer {
-    /* background-color:pink; */
     height: 60px;
     display: flex;
-    /* flex-wrap: nowrap; */
     padding-top:20px ;
     text-align: justify;
     flex-direction: row;
@@ -28,7 +24,6 @@ body {
 .playerNameBox  {
     border: 2px solid black ;
     border-radius: 10px;
-    /* border-width: 2px; */
     width:150px; 
     height: 40px;
     line-height: 40px;
@@ -45,26 +40,29 @@ body {
     margin-left: 10px;
     text-decoration: none;
     border-radius: 60px;
+    outline: none;
+    cursor: pointer;
 }
 
 .gameDiv {
-    display: grid;
-    grid-template-columns: auto auto auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     background-color: white;
-    /* padding: 10px; */
-    margin: 0px auto;
+    margin: 100px auto;
     width: 200px;
-    height: 200px;
+    height: 230px;
     border: 2px solid black;
 }
 
 .square {
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.8);
-    padding: 10px;
-    font-size: 30px;
+    flex: 33%;
     text-align: center;
     cursor: pointer;
+    height: 77px;
+    font-weight: bold;
 }
 
 td {
@@ -75,7 +73,6 @@ td {
 .timerDiv {
     display: flex;
     align-items: center;
-    /* background-color: red; */
     flex-direction: row;
     justify-content: center;
     margin: 40px auto;
@@ -89,7 +86,6 @@ td {
 .timer {
     border: 2px solid black ;
     border-radius: 50px;
-    /* border-width: 2px; */
     width:50px; 
     height: 50px;
     line-height: 50px;

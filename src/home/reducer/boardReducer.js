@@ -8,7 +8,7 @@ const initialState = {
         '', '', '',
         '', '', ''
     ],
-    turn: true,    // true ==> X,   false ===> O
+    turn: true,   
     winner: 'n'
 };
 
